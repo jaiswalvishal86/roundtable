@@ -9,11 +9,11 @@ gsap.registerPlugin(ScrollTrigger);
 
 const lenis = new Lenis({
   lerp: 0.1,
-  duration: 1.2,
+  duration: 1.5,
 });
 
 lenis.on("scroll", (e) => {
-  console.log(e);
+  // console.log(e);
 });
 
 function raf(time) {
@@ -23,30 +23,47 @@ function raf(time) {
 
 requestAnimationFrame(raf);
 
-const hero = document.querySelector(".hero");
-const canvasContainer = document.querySelector(".canvas-container");
-
 const tl = gsap.timeline({
   scrollTrigger: {
-    trigger: canvasContainer,
+    trigger: ".canvas-container",
     start: "top bottom",
-    end: "bottom top",
+    end: "center top",
     scrub: 1,
     // markers: true,
   },
 });
 
-tl.to(hero, {
+tl.to(".hero", {
   opacity: 0,
   ease: "power4.inOut",
-}).to(
-  canvasContainer,
-  {
-    scale: 1.1,
-    ease: "power2.inOut",
-  },
-  "<"
-);
+})
+  .to(
+    ".hero-bg",
+    {
+      y: -150,
+    },
+    "<"
+  )
+  .fromTo(
+    ".hero-bg",
+    {
+      scale: 1.2,
+    },
+    {
+      scale: 1,
+    },
+    "<"
+  )
+  .fromTo(
+    ".canvas-container",
+    {
+      scale: 1.2,
+    },
+    {
+      scale: 1,
+    },
+    "<"
+  );
 
 export const TILE_SIZE = 116;
 export const COLS = 15;
@@ -88,7 +105,7 @@ function loadCanvas() {
           width: 64,
           height: 64,
         },
-        position: { x: 12 * TILE_SIZE, y: TILE_SIZE },
+        position: { x: 8 * TILE_SIZE, y: TILE_SIZE },
       });
       this.input = new Input();
 
@@ -96,12 +113,12 @@ function loadCanvas() {
       this.eventTimer = 0;
       this.eventInterval = 60;
 
-      this.movementPattern = [
-        { dx: 2, dy: 0 }, // Right
-        { dx: 0, dy: 1 }, // Down
-        { dx: -1, dy: 0 }, // Left
-        { dx: 0, dy: -1 }, // Up
-      ];
+      // this.movementPattern = [
+      //   { dx: 2, dy: 0 }, // Right
+      //   { dx: 0, dy: 1 }, // Down
+      //   { dx: -1, dy: 0 }, // Left
+      //   { dx: 0, dy: -1 }, // Up
+      // ];
       this.currentMoveIndex = 0;
       this.stepsInCurrentDirection = 0;
       this.maxSteps = 3; // Number of steps in each direction
@@ -122,9 +139,9 @@ function loadCanvas() {
         this.eventUpdate = true;
       }
 
-      // if (this.eventUpdate) {
-      //   this.moveHero();
-      // }
+      if (this.eventUpdate) {
+        this.moveHero();
+      }
     }
   }
 

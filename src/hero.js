@@ -9,7 +9,7 @@ export class Hero extends GameObject {
     this.maxFrame = 8;
     this.moving = false;
     this.direction = 1;
-    this.walkRange = 2;
+    this.walkRange = 4;
     this.startX = this.position.x;
     this.maxX = this.startX + this.walkRange * TILE_SIZE;
     this.minX = this.startX - this.walkRange * TILE_SIZE;
