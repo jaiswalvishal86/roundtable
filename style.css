@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+
 @font-face {
   font-family: Dogicapixel;
   src: url("/fonts/dogicapixel.otf") format("opentype");
@@ -12,11 +14,33 @@
 }
 
 :root {
-  font-family: Dogicapixel, sans-serif;
+  /* font-family: Dogicapixel, sans-serif; */
+  font-family: "Plus Jakarta Sans", sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
 }
 
 a {
@@ -26,11 +50,6 @@ a {
 }
 a:hover {
   color: #1c1c1c;
-}
-
-html,
-body {
-  overscroll-behavior: none;
 }
 
 body {
@@ -68,32 +87,44 @@ main {
 }
 
 .hero {
-  position: relative;
+  position: fixed;
+  top: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
   z-index: 2;
-  width: 100%;
-  height: 70vh;
-  padding: 0 4rem;
+  width: 90%;
+  height: 65vh;
+  /* padding: 0 4rem; */
+}
+
+.hero-spacer {
+  height: 75vh;
 }
 
 .hero-logo {
-  margin-top: 12vh;
   width: 100%;
 }
 
 .hero-info {
   width: 60vw;
-  min-height: 30vh;
+  min-height: 24vh;
   margin-top: 1rem;
-  padding: 2rem;
-  font-size: 1rem;
+  padding: 0.5rem 1.25rem;
+  font-size: 1.5rem;
   line-height: 1.3;
+  border-radius: 8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-image: url("/chat.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
+  background-color: rgba(230, 230, 246, 0.4);
+  backdrop-filter: blur(12px);
+  border: 28px solid;
+  border-image-source: url("/border_img.svg");
+  border-image-slice: 28;
 }
 
 .hero-info-wrap {
@@ -113,16 +144,28 @@ main {
 }
 
 .hero-bg {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: -3;
   width: 100%;
-  height: 70vh;
-  background-image: url("/clouds.png");
+  height: 73vh;
+  background-image: url("/cloud.png");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center top;
+  background-position: center;
+}
+
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -25px;
+  width: 100%;
+  height: 25px;
+  background: inherit;
+  filter: blur(12px);
+  pointer-events: none;
 }
 
 .assets {
@@ -132,9 +175,21 @@ main {
 .canvas-container {
   position: relative;
   width: 100vw;
-  z-index: -2;
+  z-index: 1;
   overflow: hidden;
   /* height: 80vh; */
+}
+
+.canvas-container::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -25px;
+  width: 100%;
+  height: 30px;
+  background: inherit;
+  filter: blur(12px);
+  pointer-events: none;
 }
 #canvas {
   border: 1px solid #242424;
