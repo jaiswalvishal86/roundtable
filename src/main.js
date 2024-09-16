@@ -4,16 +4,18 @@ import { World } from "./world.js";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import TextScramble from "./scramble.js";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Initialize Lenis
 const lenis = new Lenis({
   lerp: 0.1,
   duration: 1.5,
 });
 
 lenis.on("scroll", (e) => {
-  // console.log(e);
+  ScrollTrigger.update(); // Synchronize ScrollTrigger with Lenis
 });
 
 function raf(time) {
@@ -25,37 +27,27 @@ requestAnimationFrame(raf);
 
 const tl = gsap.timeline({
   scrollTrigger: {
-    trigger: ".canvas-container",
+    trigger: ".bottom-wrap",
     start: "top bottom",
-    end: "center top",
+    end: "center center",
     scrub: 1,
-    // markers: true,
   },
 });
 
 tl.to(".hero", {
   opacity: 0,
+  display: "none",
   ease: "power4.inOut",
 })
   .to(
     ".hero-bg",
     {
-      y: -150,
+      yPercent: -20,
     },
     "<"
   )
   .fromTo(
     ".hero-bg",
-    {
-      scale: 1.2,
-    },
-    {
-      scale: 1,
-    },
-    "<"
-  )
-  .fromTo(
-    ".canvas-container",
     {
       scale: 1.2,
     },
@@ -64,10 +56,107 @@ tl.to(".hero", {
     },
     "<"
   );
+// .fromTo(
+//   "#canvas",
+//   {
+//     scale: 1.1,
+//   },
+//   {
+//     scale: 1,
+//   },
+//   "<"
+// );
+
+let isScramble = true;
+
+let tl2;
+
+function createScrollAnimation() {
+  // Kill the previous timeline if it exists
+  if (tl2) {
+    tl2.kill();
+  }
+  console.log("risizing");
+
+  tl2 = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".bottom-wrap",
+      start: "top -25%",
+      end: "bottom bottom",
+      scrub: 1, // Reduced scrub time
+      fastScrollEnd: true, // Improves performance during fast scrolling
+      invalidateOnRefresh: true,
+      // markers: true,
+    },
+    onStart: () => {
+      if (isScramble) {
+        const el = document.querySelector(".content-info p");
+        const fx = new TextScramble(el);
+        fx.setText(el.innerText);
+        isScramble = false;
+      }
+    },
+  });
+
+  // Add your animations to tl2 here
+  tl2
+    .to(".canvas-container", {
+      scale: 0.9,
+      force3D: true,
+      overwrite: "auto",
+    })
+    .to(
+      [".pillar.right", ".pillar.left"],
+      {
+        xPercent: (index) => (index === 0 ? -75 : 75),
+        scale: 1.1,
+        ease: "power2.out",
+        force3D: true,
+        overwrite: "auto",
+      },
+      "<"
+    )
+    .to(
+      ".content-wrap",
+      {
+        yPercent: -95,
+        ease: "power2.out",
+        force3D: true,
+        overwrite: "auto",
+      },
+      "<+0.25"
+    )
+    .to(
+      ".orland-wrap",
+      {
+        yPercent: -115,
+        ease: "power2.out",
+        force3D: true,
+        overwrite: "auto",
+      },
+      "<+0.1"
+    );
+}
+
+const proceedBtn = document.querySelector(".proceed-btn");
+
+proceedBtn.addEventListener("click", () => {
+  const tl3 = gsap.timeline();
+
+  tl3
+    .to(".content-info", {
+      opacity: 0,
+      display: "none",
+    })
+    .to(".form-container", {
+      opacity: 1,
+      display: "block",
+    });
+});
 
 export const TILE_SIZE = 116;
 export const COLS = 15;
-export const ROWS = 10;
+export const ROWS = 11;
 export const HALF_TILE = TILE_SIZE / 2;
 
 function loadCanvas() {
@@ -106,6 +195,7 @@ function loadCanvas() {
           height: 64,
         },
         position: { x: 8 * TILE_SIZE, y: TILE_SIZE },
+        label: "Hero",
       });
       this.input = new Input();
 
@@ -113,12 +203,6 @@ function loadCanvas() {
       this.eventTimer = 0;
       this.eventInterval = 60;
 
-      // this.movementPattern = [
-      //   { dx: 2, dy: 0 }, // Right
-      //   { dx: 0, dy: 1 }, // Down
-      //   { dx: -1, dy: 0 }, // Left
-      //   { dx: 0, dy: -1 }, // Up
-      // ];
       this.currentMoveIndex = 0;
       this.stepsInCurrentDirection = 0;
       this.maxSteps = 3; // Number of steps in each direction
@@ -129,6 +213,7 @@ function loadCanvas() {
       this.world.drawBackground(ctx);
       this.world.drawGrid(ctx);
       // this.hero.draw(ctx);
+      // this.hero.renderLabel(ctx);
       this.world.drawForeground(ctx);
 
       if (this.eventTimer < this.eventInterval) {
@@ -139,9 +224,9 @@ function loadCanvas() {
         this.eventUpdate = true;
       }
 
-      if (this.eventUpdate) {
-        this.moveHero();
-      }
+      // if (this.eventUpdate) {
+      //   this.moveHero();
+      // }
     }
   }
 
@@ -160,5 +245,15 @@ function loadCanvas() {
   animate();
 }
 
-window.addEventListener("load", loadCanvas);
-// window.addEventListener("resize", loadCanvas);
+window.addEventListener("load", () => {
+  // const el = document.querySelector(".scramble-text");
+  // const fx = new TextScramble(el);
+  // fx.setText(el.innerText);
+  loadCanvas();
+  createScrollAnimation();
+});
+
+window.addEventListener("resize", () => {
+  loadCanvas();
+  createScrollAnimation();
+});

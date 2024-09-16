@@ -9,30 +9,147 @@
   </head>
   <body>
     <main>
-      <section class="hero">
+      <header>
+        <img src="/hamburger.svg" alt="Roundtable" class="hamburger" />
+        <a href="/"> Contact </a>
+      </header>
+      <div class="hero">
         <img src="/roundtable.svg" alt="Roundtable" class="hero-logo" />
         <div class="hero-info-wrap">
-          <div class="hero-info">
-            Roundtable the first expert network for early venture. We are a
-            vetted group of freelancers, services, and agencies chosen for high
-            character, consistent results, and top quality.
+          <div class="hero-info" id="heroInfo">
+            <span class="scramble-text"
+              >Roundtable the first expert network for early venture. We are a
+              vetted group of freelancers, services, and agencies chosen for
+              high character, consistent results, and top quality.</span
+            >
           </div>
           <div class="arrow-wrap">
             <img src="/arrow.png" class="arrow" alt="arrow" />
           </div>
         </div>
-      </section>
+      </div>
+      <div class="pillars-wrap">
+        <div class="pillar right">
+          <img src="/pillar_right.png" alt="pillar" />
+        </div>
+        <div class="pillar left">
+          <img src="/pillar_left.png" alt="pillar" />
+        </div>
+        <div class="orland-wrap">
+          <img src="/orland.png" alt="orland" />
+        </div>
+        <div class="content-wrap">
+          <div class="content">
+            <div class="content-info">
+              <h2>The Guardian:</h2>
+              <p>Share your business, for the roundtable</p>
+            </div>
+
+            <div class="form-container">
+              <form id="contactForm">
+                <p>
+                  Hi, my name is
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="NAME HERE"
+                    required
+                  />
+                  and I'm the
+                  <input
+                    type="text"
+                    id="position"
+                    name="position"
+                    placeholder="POSITION"
+                    required
+                  />
+                  at
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    placeholder="COMPANY NAME"
+                    required
+                  />
+                  based in
+                  <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    placeholder="LOCATION"
+                    required
+                  />
+                  . I'm looking to hire a
+                  <input
+                    type="text"
+                    id="jobTitle"
+                    name="jobTitle"
+                    placeholder="JOB TITLE"
+                    required
+                  />
+                  for my
+                  <input
+                    type="text"
+                    id="projectName"
+                    name="projectName"
+                    placeholder="PROJECT NAME"
+                    required
+                  />
+                  Project due in
+                  <input
+                    type="text"
+                    id="projectDuration"
+                    name="projectDuration"
+                    placeholder="DURATION"
+                    required
+                  />
+                  and I have a budget of
+                  <input
+                    type="text"
+                    id="budget"
+                    name="budget"
+                    placeholder="$00000"
+                    required
+                  />
+                  . My email is
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="EMAIL ADDRESS"
+                    required
+                  />
+                  and my company's website is
+                  <input
+                    type="url"
+                    id="website"
+                    name="website"
+                    placeholder="WEBSITE LINK"
+                    required
+                  />
+                  .
+                </p>
+                <!-- <button type="submit">Submit</button> -->
+              </form>
+            </div>
+          </div>
+          <button class="proceed-btn">Proceed</button>
+        </div>
+      </div>
       <section class="hero-bg"></section>
       <section class="hero-spacer"></section>
-      <section class="canvas-container">
-        <canvas id="canvas"></canvas>
-        <div class="assets">
-          <img src="/scene1.png" alt="Scene" id="scene" />
-          <img src="/table.png" alt="Scene" id="table" />
-          <img src="/charecter.png" alt="Scene" id="hero" />
-        </div>
-      </section>
-      <!-- <section id="spacer-bottom" class="hero-spacer"></section> -->
+      <div class="bottom-wrap">
+        <section class="canvas-container">
+          <canvas id="canvas"></canvas>
+          <div class="assets">
+            <img src="/scene.png" alt="Scene" id="scene" />
+            <img src="/table.png" alt="Scene" id="table" />
+            <img src="/charecter.png" alt="Scene" id="hero" />
+          </div>
+        </section>
+        <!-- <section class="spacer-bottom"></section> -->
+      </div>
     </main>
     <script type="module" src="/src/main.js"></script>
   </body>

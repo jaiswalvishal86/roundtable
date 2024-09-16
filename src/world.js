@@ -19,10 +19,10 @@ export class World {
   drawForeground(ctx) {
     ctx.drawImage(
       this.level1.foregroundLayer,
-      this.level1.foregroundLayer.width / 5,
-      this.level1.foregroundLayer.height / 3,
-      this.level1.foregroundLayer.width / 4,
-      this.level1.foregroundLayer.height / 4
+      this.level1.foregroundLayer.width / 4.8,
+      this.level1.foregroundLayer.height / 3.5,
+      this.level1.foregroundLayer.width / 4.5,
+      this.level1.foregroundLayer.height / 4.5
     );
   }
   drawGrid(ctx) {

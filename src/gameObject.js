@@ -44,7 +44,7 @@ export class GameObject {
     return distance;
   }
   draw(ctx) {
-    ctx.fillStyle = "blue";
+    // ctx.fillStyle = "blue";
     // ctx.fillRect(this.position.x, this.position.y, TILE_SIZE, TILE_SIZE);
     ctx.drawImage(
       this.sprite.image,
@@ -53,7 +53,7 @@ export class GameObject {
       this.sprite.width,
       this.sprite.height,
       this.position.x + HALF_TILE - this.halfWidth,
-      this.position.y + TILE_SIZE - this.height * 1.5,
+      this.position.y + TILE_SIZE - 1.35 * this.height,
       this.width,
       this.height
     );
