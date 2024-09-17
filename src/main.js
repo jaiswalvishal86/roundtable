@@ -83,8 +83,8 @@ function createScrollAnimation() {
       trigger: ".bottom-wrap",
       start: "top -25%",
       end: "bottom bottom",
-      scrub: 1, // Reduced scrub time
-      fastScrollEnd: true, // Improves performance during fast scrolling
+      scrub: 1,
+      fastScrollEnd: true,
       invalidateOnRefresh: true,
       // markers: true,
     },
@@ -126,15 +126,29 @@ function createScrollAnimation() {
       },
       "<+0.25"
     )
-    .to(
+    .fromTo(
       ".orland-wrap",
       {
+        opacity: 0,
+      },
+      {
+        opacity: 1,
         yPercent: -115,
         ease: "power2.out",
         force3D: true,
         overwrite: "auto",
       },
       "<+0.1"
+    )
+    .fromTo(
+      ".pillars-wrap",
+      {
+        pointerEvents: "none",
+      },
+      {
+        pointerEvents: "auto",
+      },
+      "<"
     );
 }
 
@@ -154,9 +168,9 @@ proceedBtn.addEventListener("click", () => {
     });
 });
 
-export const TILE_SIZE = 116;
+export const TILE_SIZE = 108;
 export const COLS = 15;
-export const ROWS = 11;
+export const ROWS = 12;
 export const HALF_TILE = TILE_SIZE / 2;
 
 function loadCanvas() {
@@ -164,19 +178,32 @@ function loadCanvas() {
   const ctx = canvas.getContext("2d");
   const container = canvas.parentElement;
 
-  // Always set the width to the container's full width
-  const newWidth = container.clientWidth;
+  // Define breakpoint for switching to vertical layout
+  const breakpoint = 1280; // Adjust this value as needed
 
-  // Calculate the height based on the aspect ratio
-  const aspectRatio = COLS / ROWS;
-  const newHeight = newWidth / aspectRatio;
+  // Get container width
+  const containerWidth = container.clientWidth;
+
+  // Calculate dimensions and scale
+  let newWidth, newHeight, scale;
+
+  if (containerWidth <= breakpoint) {
+    // Vertical layout for smaller screens
+    newWidth = containerWidth;
+    newHeight = ((newWidth * ROWS) / COLS) * 1.25;
+    scale = newWidth / (COLS * TILE_SIZE);
+  } else {
+    // Horizontal layout for larger screens
+    newWidth = containerWidth;
+    newHeight = newWidth / (COLS / ROWS);
+    scale = newWidth / (COLS * TILE_SIZE);
+  }
 
   // Set canvas size
   canvas.width = newWidth;
   canvas.height = newHeight;
 
-  // Scale the context to maintain tile size proportions
-  const scale = newWidth / (COLS * TILE_SIZE);
+  // Scale the context
   ctx.scale(scale, scale);
 
   // Adjust container height to match canvas
@@ -214,7 +241,7 @@ function loadCanvas() {
       this.world.drawGrid(ctx);
       // this.hero.draw(ctx);
       // this.hero.renderLabel(ctx);
-      this.world.drawForeground(ctx);
+      // this.world.drawForeground(ctx);
 
       if (this.eventTimer < this.eventInterval) {
         this.eventTimer += deltaTime;
@@ -253,7 +280,25 @@ window.addEventListener("load", () => {
   createScrollAnimation();
 });
 
-window.addEventListener("resize", () => {
+// ... existing code ...
+
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+const debouncedResize = debounce(() => {
   loadCanvas();
   createScrollAnimation();
-});
+}, 250); // Adjust the delay (in milliseconds) as needed
+
+window.addEventListener("resize", debouncedResize);
+
+// ... existing code ...
