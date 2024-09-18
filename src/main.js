@@ -89,7 +89,7 @@ function createScrollAnimation() {
       // markers: true,
     },
     onStart: () => {
-      if (isScramble) {
+      if (isScramble && window.innerWidth > 600) {
         const el = document.querySelector(".content-info p");
         const fx = new TextScramble(el);
         fx.setText(el.innerText);
@@ -101,7 +101,7 @@ function createScrollAnimation() {
   // Add your animations to tl2 here
   tl2
     .to(".canvas-container", {
-      scale: 0.9,
+      scale: 1,
       force3D: true,
       overwrite: "auto",
     })
@@ -188,7 +188,7 @@ function loadCanvas() {
     ROWS = 15;
   } else if (window.innerWidth <= 600) {
     heightScaler = 2.5;
-    ROWS = 18;
+    ROWS = 17;
   } else {
     heightScaler = 1.25;
     ROWS = 12;

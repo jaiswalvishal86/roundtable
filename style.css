@@ -645,4 +645,8 @@ input[type="url"] {
   .proceed-btn {
     display: none;
   }
+
+  .pillar {
+    display: none;
+  }
 }
