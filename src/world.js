@@ -1,4 +1,4 @@
-import { COLS, ROWS, TILE_SIZE } from "./main.js";
+import { COLS, heightScaler, ROWS, TILE_SIZE } from "./main.js";
 
 export class World {
   constructor() {
@@ -13,7 +13,7 @@ export class World {
       0,
       0,
       this.level1.backgroundLayer.width,
-      this.level1.backgroundLayer.height
+      this.level1.backgroundLayer.height * heightScaler
     );
   }
   drawForeground(ctx) {

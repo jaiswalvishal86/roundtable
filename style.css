@@ -82,6 +82,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 1.2rem;
   padding: 2rem 0rem;
   z-index: 99;
   text-transform: uppercase;
@@ -258,7 +259,7 @@ header {
 }
 
 .canvas-img-wrap.oracle {
-  top: 47%;
+  top: 46%;
   left: 62%;
 }
 
@@ -343,7 +344,7 @@ header {
   align-items: flex-end;
   height: 75vh;
   background-color: #f0f0f0;
-  border-radius: 6.5rem;
+  border-radius: 7rem;
   border: 30px solid transparent;
   border-image-source: url("/container_border.png");
   border-image-slice: 100;
@@ -355,8 +356,9 @@ header {
 .orland-wrap {
   position: absolute;
   top: 0%;
-  left: -2.5%;
+  left: -0.5%;
   width: 40vw;
+  height: 100%;
   z-index: inherit;
   transform: translateY(120%);
   opacity: 0;
@@ -365,6 +367,7 @@ header {
 
 .orland-wrap img {
   width: 100%;
+  object-fit: cover;
 }
 
 .content {
@@ -451,7 +454,7 @@ input[type="url"] {
   }
 
   .canvas-img-wrap.oracle {
-    left: 75%;
+    left: 73%;
   }
 
   .canvas-img-wrap.mage {
@@ -495,28 +498,151 @@ input[type="url"] {
 @media screen and (max-width: 1024px) {
   header {
     padding: 3rem 0rem;
+    font-size: 1.5rem;
   }
   .hero {
     top: 20vh;
   }
+
   .arrow-wrap {
-    margin-right: 2rem;
+    margin-right: 1rem;
   }
-  /* #canvas {
-    position: relative;
-    top: 0;
-    left: 0;
-    transform: translate(0, 0);
-    min-height: 100vh;
-  } */
+  .pillar img {
+    object-fit: cover;
+  }
+  .img-label-wrap {
+    top: -100%;
+    gap: 0.75rem;
+    font-size: 1rem;
+  }
+  .orland-wrap {
+    top: 15%;
+  }
+
+  .canvas-img-wrap.archer {
+    top: 33%;
+  }
+
+  .canvas-img-wrap.female {
+    top: 33%;
+  }
+
+  .canvas-img-wrap.knight {
+    top: 32%;
+  }
+
+  .canvas-img-wrap.mage {
+    top: 42%;
+  }
+
+  .canvas-img-wrap.mist {
+    top: 42%;
+  }
+
+  .canvas-img-wrap.back {
+    top: 42%;
+  }
+
+  .canvas-img-wrap.stone {
+    top: 40%;
+  }
+
+  .canvas-img-wrap.squire {
+    top: 37%;
+  }
+
+  .canvas-img-wrap.oracle {
+    top: 37%;
+  }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 600px) {
+  header {
+    font-size: 1.25rem;
+  }
   .hero-info {
+    width: 100%;
+    font-size: 0.85rem;
+    text-align: center;
+    /* padding: 0.5rem 1rem; */
+    border-radius: 4rem;
+  }
+
+  .arrow-wrap {
+    display: none;
+  }
+
+  .canvas-img-wrap.archer {
+    top: 28%;
+  }
+
+  .canvas-img-wrap.female {
+    top: 28%;
+  }
+
+  .canvas-img-wrap.knight {
+    top: 27%;
+  }
+
+  .canvas-img-wrap.mage {
+    top: 34%;
+  }
+
+  .canvas-img-wrap.mist {
+    top: 34%;
+  }
+
+  .canvas-img-wrap.back {
+    top: 34%;
+  }
+
+  .canvas-img-wrap.stone {
+    top: 33%;
+  }
+
+  .canvas-img-wrap.squire {
+    top: 30%;
+  }
+
+  .canvas-img-wrap.oracle {
+    top: 30%;
+  }
+
+  .orland-wrap {
+    width: 65vw;
+    left: -20%;
+  }
+
+  .content-wrap {
     width: 100%;
   }
 
-  .arrow-wrap {
+  .content {
+    width: 70vw;
+    position: absolute;
+    top: -22.5%;
+    left: 20%;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 0.25rem;
+  }
+
+  .content-info {
+    width: 100%;
+  }
+
+  .content-info h2 {
+    font-size: 0.6rem;
+  }
+
+  .content-info p {
+    width: 100%;
+    font-size: 0.8rem;
+    max-width: none;
+  }
+
+  .proceed-btn {
     display: none;
   }
 }

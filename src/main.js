@@ -116,10 +116,14 @@ function createScrollAnimation() {
       },
       "<"
     )
-    .to(
+    .fromTo(
       ".content-wrap",
       {
+        opacity: 0,
+      },
+      {
         yPercent: -95,
+        opacity: 1,
         ease: "power2.out",
         force3D: true,
         overwrite: "auto",
@@ -133,12 +137,12 @@ function createScrollAnimation() {
       },
       {
         opacity: 1,
-        yPercent: -115,
+        yPercent: -110,
         ease: "power2.out",
         force3D: true,
         overwrite: "auto",
       },
-      "<+0.1"
+      "<+0.15"
     )
     .fromTo(
       ".pillars-wrap",
@@ -170,13 +174,25 @@ proceedBtn.addEventListener("click", () => {
 
 export const TILE_SIZE = 108;
 export const COLS = 15;
-export const ROWS = 12;
+export let ROWS = 12;
 export const HALF_TILE = TILE_SIZE / 2;
+export let heightScaler = 2;
 
 function loadCanvas() {
   const canvas = document.getElementById("canvas");
   const ctx = canvas.getContext("2d");
   const container = canvas.parentElement;
+
+  if (window.innerWidth <= 1024 && window.innerWidth >= 768) {
+    heightScaler = 2;
+    ROWS = 15;
+  } else if (window.innerWidth <= 600) {
+    heightScaler = 2.5;
+    ROWS = 18;
+  } else {
+    heightScaler = 1.25;
+    ROWS = 12;
+  }
 
   // Define breakpoint for switching to vertical layout
   const breakpoint = 1280; // Adjust this value as needed
@@ -190,7 +206,7 @@ function loadCanvas() {
   if (containerWidth <= breakpoint) {
     // Vertical layout for smaller screens
     newWidth = containerWidth;
-    newHeight = ((newWidth * ROWS) / COLS) * 1.25;
+    newHeight = ((newWidth * ROWS) / COLS) * heightScaler;
     scale = newWidth / (COLS * TILE_SIZE);
   } else {
     // Horizontal layout for larger screens
