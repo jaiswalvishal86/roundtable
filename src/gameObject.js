@@ -11,7 +11,7 @@ export class GameObject {
       height: TILE_SIZE,
     };
     this.position = position ?? { x: 0, y: 0 };
-    this.scale = scale ?? 2.5;
+    this.scale = scale ?? window.innerWidth <= 600 ? 4 : 2.5;
 
     this.destinationPosition = { x: this.position.x, y: this.position.y };
     this.distanceToTravel = { x: 0, y: 0 };

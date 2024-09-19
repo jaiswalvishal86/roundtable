@@ -162,14 +162,30 @@ proceedBtn.addEventListener("click", () => {
   const tl3 = gsap.timeline();
 
   tl3
-    .to(".content-info", {
+    .to(".content", {
       opacity: 0,
       display: "none",
     })
-    .to(".form-container", {
+    .to(".content.form-wrap", {
       opacity: 1,
       display: "block",
-    });
+    })
+    .to(
+      ".proceed-btn",
+      {
+        display: "none",
+        opacity: 0,
+      },
+      "<"
+    )
+    .to(
+      ".submit-btn",
+      {
+        display: "block",
+        opacity: 1,
+      },
+      "<"
+    );
 });
 
 export const TILE_SIZE = 108;
@@ -237,8 +253,31 @@ function loadCanvas() {
           width: 64,
           height: 64,
         },
-        position: { x: 8 * TILE_SIZE, y: TILE_SIZE },
+        position: {
+          x: 8 * TILE_SIZE,
+          y: window.innerWidth <= 600 ? 2 * TILE_SIZE : 1 * TILE_SIZE,
+        },
+        walkRange: 3,
+        speed: 3,
         label: "Hero",
+      });
+
+      this.hero1 = new Hero({
+        game: this,
+        sprite: {
+          image: document.getElementById("hero1"),
+          x: 0,
+          y: 11,
+          width: 64,
+          height: 64,
+        },
+        position: {
+          x: 3 * TILE_SIZE,
+          y: window.innerWidth <= 600 ? 12 * TILE_SIZE : 8 * TILE_SIZE,
+        },
+        walkRange: 1,
+        speed: 2,
+        label: "Hero1",
       });
       this.input = new Input();
 
@@ -253,9 +292,11 @@ function loadCanvas() {
 
     render(ctx, deltaTime) {
       this.hero.update();
+      // this.hero1.update();
       this.world.drawBackground(ctx);
       this.world.drawGrid(ctx);
-      // this.hero.draw(ctx);
+      this.hero.draw(ctx);
+      // this.hero1.draw(ctx);
       // this.hero.renderLabel(ctx);
       // this.world.drawForeground(ctx);
 
@@ -294,6 +335,7 @@ window.addEventListener("load", () => {
   // fx.setText(el.innerText);
   loadCanvas();
   createScrollAnimation();
+  handleLenisPrevent();
 });
 
 // ... existing code ...
@@ -310,9 +352,19 @@ function debounce(func, wait) {
   };
 }
 
+function handleLenisPrevent() {
+  const formWrap = document.querySelector(".content.form-wrap");
+  if (window.innerWidth <= 600) {
+    formWrap.setAttribute("data-lenis-prevent", "");
+  } else {
+    formWrap.removeAttribute("data-lenis-prevent");
+  }
+}
+
 const debouncedResize = debounce(() => {
   loadCanvas();
   createScrollAnimation();
+  handleLenisPrevent();
 }, 250); // Adjust the delay (in milliseconds) as needed
 
 window.addEventListener("resize", debouncedResize);

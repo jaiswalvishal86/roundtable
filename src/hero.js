@@ -3,13 +3,13 @@ import { GameObject } from "./gameObject.js";
 import { TILE_SIZE } from "./main.js";
 
 export class Hero extends GameObject {
-  constructor({ game, sprite, position, scale, label }) {
+  constructor({ game, sprite, position, scale, label, walkRange, speed }) {
     super({ game, sprite, position, scale });
-    this.speed = 4;
+    this.speed = speed;
     this.maxFrame = 8;
     this.moving = false;
     this.direction = 1;
-    this.walkRange = 4;
+    this.walkRange = walkRange;
     this.startX = this.position.x;
     this.maxX = this.startX + this.walkRange * TILE_SIZE;
     this.minX = this.startX - this.walkRange * TILE_SIZE;
@@ -30,14 +30,14 @@ export class Hero extends GameObject {
   }
 
   moveLeftRight() {
-    // const nextX = this.position.x + this.direction * this.speed;
+    const nextX = this.position.x + this.direction * this.speed;
 
-    // if (nextX <= this.minX || nextX >= this.maxX) {
-    //   this.direction *= -1; // Reverse direction
-    // }
+    if (nextX <= this.minX || nextX >= this.maxX) {
+      this.direction *= -1; // Reverse direction
+    }
 
-    // this.position.x += this.direction * this.speed;
-    // this.moving = true;
+    this.position.x += this.direction * this.speed;
+    this.moving = true;
 
     // Ensure the hero stays within the defined range
     this.position.x = Math.max(this.minX, Math.min(this.position.x, this.maxX));

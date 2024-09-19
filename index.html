@@ -44,11 +44,12 @@
               <h2>The Guardian:</h2>
               <p>Share your business, for the roundtable</p>
             </div>
-
+          </div>
+          <div class="content form-wrap" data-lenis-prevent>
             <div class="form-container">
               <form id="contactForm">
                 <p>
-                  Hi, my name is
+                  <label for="name">Hi, my name is</label>
                   <input
                     type="text"
                     id="name"
@@ -56,7 +57,7 @@
                     placeholder="NAME HERE"
                     required
                   />
-                  and I'm the
+                  <label for="position">and I'm the</label>
                   <input
                     type="text"
                     id="position"
@@ -64,7 +65,7 @@
                     placeholder="POSITION"
                     required
                   />
-                  at
+                  <label for="company">at</label>
                   <input
                     type="text"
                     id="company"
@@ -80,7 +81,7 @@
                     placeholder="LOCATION"
                     required
                   /> -->
-                  . I'm looking to hire a
+                  <label for="jobTitle">. I'm looking to hire a</label>
                   <input
                     type="text"
                     id="jobTitle"
@@ -88,7 +89,7 @@
                     placeholder="JOB TITLE"
                     required
                   />
-                  for my
+                  <label for="projectName">for my</label>
                   <input
                     type="text"
                     id="projectName"
@@ -96,7 +97,7 @@
                     placeholder="PROJECT NAME"
                     required
                   />
-                  Project due in
+                  <label for="projectDuration">Project due in</label>
                   <input
                     type="text"
                     id="projectDuration"
@@ -104,7 +105,7 @@
                     placeholder="DURATION"
                     required
                   />
-                  and I have a budget of
+                  <label for="budget">and I have a budget of</label>
                   <input
                     type="text"
                     id="budget"
@@ -112,7 +113,7 @@
                     placeholder="$00000"
                     required
                   />
-                  . My email is
+                  <label for="email">. My email is</label>
                   <input
                     type="email"
                     id="email"
@@ -120,7 +121,7 @@
                     placeholder="EMAIL ADDRESS"
                     required
                   />
-                  and my company's website is
+                  <label for="website">. My company's website is</label>
                   <input
                     type="url"
                     id="website"
@@ -130,7 +131,7 @@
                   />
                   .
                 </p>
-                <!-- <button type="submit">Submit</button> -->
+                <button class="submit-btn" type="submit">Submit</button>
               </form>
             </div>
           </div>
@@ -205,6 +206,7 @@
             <img src="/scene2.png" alt="Scene" id="scene" />
             <img src="/table2.png" alt="table" id="table" />
             <img src="/charecter.png" alt="Scene" id="hero" />
+            <img src="/hero2.png" alt="Scene" id="hero1" />
           </div>
         </section>
         <!-- <section class="spacer-bottom"></section> -->
