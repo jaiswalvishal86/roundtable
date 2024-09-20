@@ -25,6 +25,15 @@ function raf(time) {
 
 requestAnimationFrame(raf);
 
+document.querySelector(".hero-info").addEventListener("click", function () {
+  this.classList.toggle("flip");
+});
+
+document.getElementById("contactLink").addEventListener("click", function (e) {
+  e.preventDefault();
+  lenis.scrollTo("bottom", { duration: 2 });
+});
+
 const tl = gsap.timeline({
   scrollTrigger: {
     trigger: ".bottom-wrap",
@@ -81,7 +90,7 @@ function createScrollAnimation() {
   tl2 = gsap.timeline({
     scrollTrigger: {
       trigger: ".bottom-wrap",
-      start: "top -25%",
+      start: `top ${window.innerWidth <= 600 ? "-5%" : "-25%"}`,
       end: "bottom bottom",
       scrub: 1,
       fastScrollEnd: true,
@@ -203,7 +212,7 @@ function loadCanvas() {
     heightScaler = 2;
     ROWS = 15;
   } else if (window.innerWidth <= 600) {
-    heightScaler = 2.5;
+    heightScaler = 2.35;
     ROWS = 17;
   } else {
     heightScaler = 1.25;
@@ -336,6 +345,7 @@ window.addEventListener("load", () => {
   loadCanvas();
   createScrollAnimation();
   handleLenisPrevent();
+  updateLabels();
 });
 
 // ... existing code ...
@@ -361,10 +371,20 @@ function handleLenisPrevent() {
   }
 }
 
+function updateLabels() {
+  if (window.innerWidth <= 600) {
+    const labels = document.querySelectorAll("label");
+    labels.forEach((label) => {
+      label.innerHTML = label.innerHTML.replace(/\.\s*/g, "");
+    });
+  }
+}
+
 const debouncedResize = debounce(() => {
   loadCanvas();
   createScrollAnimation();
   handleLenisPrevent();
+  updateLabels();
 }, 250); // Adjust the delay (in milliseconds) as needed
 
 window.addEventListener("resize", debouncedResize);

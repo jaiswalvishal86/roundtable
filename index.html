@@ -10,18 +10,27 @@
   <body>
     <main>
       <header>
-        <img src="/hamburger.svg" alt="Roundtable" class="hamburger" />
-        <a href="/"> Contact </a>
+        <a href="/">
+          <img src="/arrow.png" alt="Roundtable" class="hamburger" />
+        </a>
+        <a href="#" id="contactLink"> Contact </a>
       </header>
       <div class="hero">
         <img src="/roundtable.svg" alt="Roundtable" class="hero-logo" />
         <div class="hero-info-wrap">
           <div class="hero-info" id="heroInfo">
-            <span class="scramble-text"
-              >Roundtable the first expert network for early venture. We are a
-              vetted group of freelancers, services, and agencies chosen for
-              high character, consistent results, and top quality.</span
-            >
+            <div class="hero-content">
+              <div class="front">
+                <h2>Expert services for early venture</h2>
+              </div>
+              <div class="back">
+                <p>
+                  We are an exclusive network of agencies & freelancers known
+                  for high character, consistent results, and unique
+                  specializations serving start-ups and venture-backed companies
+                </p>
+              </div>
+            </div>
           </div>
           <div class="arrow-wrap">
             <img src="/arrow.png" class="arrow" alt="arrow" />
@@ -123,13 +132,12 @@
                   />
                   <label for="website">. My company's website is</label>
                   <input
-                    type="url"
+                    type="text"
                     id="website"
                     name="website"
                     placeholder="WEBSITE LINK"
                     required
                   />
-                  .
                 </p>
                 <button class="submit-btn" type="submit">Submit</button>
               </form>
