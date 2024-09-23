@@ -391,6 +391,43 @@ window.addEventListener("load", () => {
           alert("Oops! There was a problem submitting your form");
         });
     });
+
+  const alphabetInputs = document.querySelectorAll(
+    "[data-content='alphabets']"
+  );
+  const numberInputs = document.querySelectorAll("[data-content='numbers']");
+
+  alphabetInputs.forEach((input) => {
+    input.addEventListener("input", function () {
+      // Get the input value
+      var inputValue = input.value;
+
+      // Create a regular expression to match non-alphabetic characters
+      var nonAlphabeticRegex = /[^a-zA-Z ]/;
+
+      // Test if the input contains non-alphabetic characters
+      if (nonAlphabeticRegex.test(inputValue)) {
+        // If non-alphabetic characters are found, remove them
+        input.value = inputValue.replace(nonAlphabeticRegex, "");
+      }
+    });
+  });
+
+  numberInputs.forEach((input) => {
+    input.addEventListener("input", function () {
+      // Get the input value
+      var inputValue = input.value;
+
+      // Create a regular expression to match non-alphabetic characters
+      var nonAlphabeticRegex = /[^0-9]/;
+
+      // Test if the input contains non-alphabetic characters
+      if (nonAlphabeticRegex.test(inputValue)) {
+        // If non-alphabetic characters are found, remove them
+        input.value = inputValue.replace(nonAlphabeticRegex, "");
+      }
+    });
+  });
 });
 
 // ... existing code ...

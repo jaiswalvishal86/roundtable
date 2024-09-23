@@ -639,11 +639,6 @@ input[type="url"] {
   .canvas-img-wrap.stone {
     width: 48vw;
   }
-
-  .thanks-content-wrap {
-    top: 60%;
-    width: 80%;
-  }
 }
 
 @media screen and (max-width: 1024px) {
@@ -709,6 +704,10 @@ input[type="url"] {
 
   .canvas-img-wrap.oracle {
     top: 37%;
+  }
+
+  .thanks-content-wrap {
+    width: 80%;
   }
 
   .thanks-img-wrap {
@@ -874,8 +873,23 @@ input[type="url"] {
     margin-left: auto;
   }
 
+  .thanks-content-wrap {
+    width: 90%;
+    gap: 0;
+  }
+
+  .proceed-btn.thanks-btn {
+    display: block;
+  }
+
+  .thanks-content {
+    font-size: 1rem;
+    padding: 1rem;
+    gap: 0;
+  }
+
   .thanks-img-wrap {
     width: 16rem;
-    left: -10%;
+    left: -15%;
   }
 }
