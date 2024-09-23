@@ -197,6 +197,21 @@ proceedBtn.addEventListener("click", () => {
     );
 });
 
+function handlePreloader() {
+  const preloader = document.getElementById("preloader");
+  const preloaderVideo = document.getElementById("preloader-video");
+  const body = document.body;
+
+  preloaderVideo.addEventListener("ended", () => {
+    body.classList.add("loaded");
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 500);
+  });
+
+  preloaderVideo.play();
+}
+
 export const TILE_SIZE = 108;
 export const COLS = 15;
 export let ROWS = 12;
@@ -301,11 +316,11 @@ function loadCanvas() {
 
     render(ctx, deltaTime) {
       this.hero.update();
-      // this.hero1.update();
+      this.hero1.update();
       this.world.drawBackground(ctx);
       this.world.drawGrid(ctx);
       this.hero.draw(ctx);
-      // this.hero1.draw(ctx);
+      this.hero1.draw(ctx);
       // this.hero.renderLabel(ctx);
       // this.world.drawForeground(ctx);
 
@@ -342,10 +357,40 @@ window.addEventListener("load", () => {
   // const el = document.querySelector(".scramble-text");
   // const fx = new TextScramble(el);
   // fx.setText(el.innerText);
+  handlePreloader();
   loadCanvas();
   createScrollAnimation();
   handleLenisPrevent();
   updateLabels();
+
+  document
+    .getElementById("contactForm")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+
+      fetch("https://formspree.io/f/xeojblel", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.ok) {
+            this.reset();
+            window.location.href = "/pages/thanks.html";
+          } else {
+            alert("Oops! There was a problem submitting your form");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("Oops! There was a problem submitting your form");
+        });
+    });
 });
 
 // ... existing code ...

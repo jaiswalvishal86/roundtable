@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div id="preloader">
+      <video id="preloader-video" muted playsinline>
+        <source src="/preloader.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
     <main>
       <header>
         <a href="/">
@@ -56,7 +62,11 @@
           </div>
           <div class="content form-wrap" data-lenis-prevent>
             <div class="form-container">
-              <form id="contactForm">
+              <form
+                id="contactForm"
+                action="https://formspree.io/f/xeojblel"
+                method="POST"
+              >
                 <p>
                   <label for="name">Hi, my name is</label>
                   <input
@@ -220,6 +230,6 @@
         <!-- <section class="spacer-bottom"></section> -->
       </div>
     </main>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/main.js"></script>
   </body>
 </html>
