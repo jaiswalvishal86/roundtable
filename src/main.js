@@ -186,41 +186,41 @@ proceedBtn.addEventListener("click", () => {
     );
 });
 
-function handlePreloader() {
-  const preloader = document.getElementById("preloader");
-  const preloaderVideo = document.getElementById("preloader-video");
-  const body = document.body;
-
-  preloaderVideo.addEventListener("ended", () => {
-    body.classList.add("loaded");
-    setTimeout(() => {
-      preloader.style.display = "none";
-    }, 500);
-  });
-
-  preloaderVideo.play();
-}
-
 // function handlePreloader() {
 //   const preloader = document.getElementById("preloader");
-//   const lottieContainer = document.getElementById("lottie-container");
+//   const preloaderVideo = document.getElementById("preloader-video");
 //   const body = document.body;
 
-//   const animation = lottie.loadAnimation({
-//     container: lottieContainer,
-//     renderer: "svg",
-//     loop: false,
-//     autoplay: true,
-//     path: "/table_loader.json", // Replace with your Lottie JSON file path
-//   });
-
-//   animation.addEventListener("complete", () => {
+//   preloaderVideo.addEventListener("ended", () => {
 //     body.classList.add("loaded");
 //     setTimeout(() => {
 //       preloader.style.display = "none";
 //     }, 500);
 //   });
+
+//   preloaderVideo.play();
 // }
+
+function handlePreloader() {
+  const preloader = document.getElementById("preloader");
+  const lottieContainer = document.getElementById("lottie-container");
+  const body = document.body;
+
+  const animation = lottie.loadAnimation({
+    container: lottieContainer,
+    renderer: "svg",
+    loop: false,
+    autoplay: true,
+    path: "/loader.json",
+  });
+
+  animation.addEventListener("complete", () => {
+    body.classList.add("loaded");
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 500);
+  });
+}
 
 function handleFormSubmit() {
   document
@@ -485,12 +485,11 @@ const debouncedResize = debounce(() => {
   const currentWidth = window.innerWidth;
   const currentHeight = window.innerHeight;
 
-  loadCanvas();
-  createScrollAnimation();
-  handleLenisPrevent();
-  updateLabels();
-
   if (currentWidth !== previousWidth) {
+    loadCanvas();
+    createScrollAnimation();
+    handleLenisPrevent();
+    updateLabels();
     window.location.reload();
   }
 

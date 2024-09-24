@@ -80,7 +80,7 @@ body {
 
 #lottie-container {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 
 #preloader-video {
@@ -589,7 +589,7 @@ input[type="url"] {
 .thanks-img-wrap {
   position: absolute;
   top: 10%;
-  left: 0;
+  left: -5%;
   width: 20vw;
   z-index: 2;
 }
@@ -598,7 +598,7 @@ input[type="url"] {
   position: absolute;
   width: 60%;
   top: 40%;
-  left: 55%;
+  left: 58%;
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
@@ -779,6 +779,10 @@ input[type="url"] {
     font-size: 0.7rem;
   }
 
+  .canvas-container {
+    z-index: 3;
+  }
+
   .canvas-img-wrap.archer {
     top: 28%;
   }
@@ -818,6 +822,7 @@ input[type="url"] {
   .orland-wrap {
     width: 65vw;
     left: -20%;
+    z-index: 1;
   }
 
   .content-wrap {
@@ -889,6 +894,10 @@ input[type="url"] {
 
   .proceed-btn {
     display: none;
+  }
+
+  .pillars-wrap {
+    z-index: 4;
   }
 
   .pillar {
