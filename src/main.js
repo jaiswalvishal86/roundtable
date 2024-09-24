@@ -483,7 +483,9 @@ const debouncedResize = debounce(() => {
   createScrollAnimation();
   handleLenisPrevent();
   updateLabels();
-  window.location.reload();
+  if (!document.hidden) {
+    window.location.reload();
+  }
 }, 250);
 
 window.addEventListener("resize", debouncedResize);
