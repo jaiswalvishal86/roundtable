@@ -2,10 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Roundtable</title>
+    <title>Roundtable | Expert services for early venture</title>
     <link rel="stylesheet" href="style.css" />
+
+    <!-- OpenGraph meta tags -->
+    <meta property="og:title" content="Roundtable" />
+    <meta
+      property="og:description"
+      content="Expert services for early venture"
+    />
+    <meta property="og:image" content="/roundtable.png" />
+    <meta property="og:url" content="https://roundtable.biz" />
+    <meta property="og:type" content="website" />
   </head>
   <body>
     <div id="preloader">
@@ -13,11 +23,20 @@
         <source src="/preloader.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+      <!-- <div id="lottie-container"></div> -->
+    </div>
+    <div id="processingModal" class="modal">
+      <div class="modal-content">
+        <video id="processingVideo" loop muted>
+          <source src="/process.mp4" type="video/mp4" />
+        </video>
+        <!-- <p>Processing your submission...</p> -->
+      </div>
     </div>
     <main>
       <header>
         <a href="/">
-          <img src="/arrow.png" alt="Roundtable" class="hamburger" />
+          <img src="/R.png" alt="Roundtable" class="hamburger" />
         </a>
         <a href="#" id="contactLink"> Contact </a>
       </header>
@@ -27,7 +46,7 @@
           <div class="hero-info" id="heroInfo">
             <div class="hero-content">
               <div class="front">
-                <h2>Expert services for early venture</h2>
+                <h2>Expert services <br />for early venture</h2>
               </div>
               <div class="back">
                 <p>
@@ -62,11 +81,7 @@
           </div>
           <div class="content form-wrap" data-lenis-prevent>
             <div class="form-container">
-              <form
-                id="contactForm"
-                action="https://formspree.io/f/xeojblel"
-                method="POST"
-              >
+              <form id="contactForm">
                 <p>
                   <label for="name">Hi, my name is</label>
                   <input
@@ -121,7 +136,6 @@
                   />
                   <label for="projectDuration">Project due in</label>
                   <input
-                    data-content="numbers"
                     type="text"
                     id="projectDuration"
                     name="projectDuration"
@@ -235,6 +249,7 @@
         <!-- <section class="spacer-bottom"></section> -->
       </div>
     </main>
+
     <script type="module" src="/main.js"></script>
   </body>
 </html>

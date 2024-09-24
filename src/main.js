@@ -4,6 +4,7 @@ import { World } from "./world.js";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import lottie from "lottie-web";
 import TextScramble from "./scramble.js";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -15,7 +16,7 @@ const lenis = new Lenis({
 });
 
 lenis.on("scroll", (e) => {
-  ScrollTrigger.update(); // Synchronize ScrollTrigger with Lenis
+  ScrollTrigger.update();
 });
 
 function raf(time) {
@@ -36,9 +37,9 @@ document.getElementById("contactLink").addEventListener("click", function (e) {
 
 const tl = gsap.timeline({
   scrollTrigger: {
-    trigger: ".bottom-wrap",
-    start: "top bottom",
-    end: "center center",
+    trigger: ".hero-spacer",
+    start: "top center",
+    end: "bottom top",
     scrub: 1,
   },
 });
@@ -65,16 +66,6 @@ tl.to(".hero", {
     },
     "<"
   );
-// .fromTo(
-//   "#canvas",
-//   {
-//     scale: 1.1,
-//   },
-//   {
-//     scale: 1,
-//   },
-//   "<"
-// );
 
 let isScramble = true;
 
@@ -85,7 +76,6 @@ function createScrollAnimation() {
   if (tl2) {
     tl2.kill();
   }
-  console.log("risizing");
 
   tl2 = gsap.timeline({
     scrollTrigger: {
@@ -107,7 +97,6 @@ function createScrollAnimation() {
     },
   });
 
-  // Add your animations to tl2 here
   tl2
     .to(".canvas-container", {
       scale: 1,
@@ -212,6 +201,104 @@ function handlePreloader() {
   preloaderVideo.play();
 }
 
+// function handlePreloader() {
+//   const preloader = document.getElementById("preloader");
+//   const lottieContainer = document.getElementById("lottie-container");
+//   const body = document.body;
+
+//   const animation = lottie.loadAnimation({
+//     container: lottieContainer,
+//     renderer: "svg",
+//     loop: false,
+//     autoplay: true,
+//     path: "/table_loader.json", // Replace with your Lottie JSON file path
+//   });
+
+//   animation.addEventListener("complete", () => {
+//     body.classList.add("loaded");
+//     setTimeout(() => {
+//       preloader.style.display = "none";
+//     }, 500);
+//   });
+// }
+
+function handleFormSubmit() {
+  document
+    .getElementById("contactForm")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const modal = document.getElementById("processingModal");
+      const video = document.getElementById("processingVideo");
+
+      // Show the modal and play the video
+      modal.style.display = "block";
+      video.play();
+
+      fetch("https://formspree.io/f/xanwgvla", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.ok) {
+            this.reset();
+            // Hide the modal and pause the video
+            modal.style.display = "none";
+            video.pause();
+            window.location.href = "/pages/thanks.html";
+          } else {
+            // Hide the modal and pause the video
+            modal.style.display = "none";
+            video.pause();
+            alert("Oops! There was a problem submitting your form");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          // Hide the modal and pause the video
+          modal.style.display = "none";
+          video.pause();
+          alert("Oops! There was a problem submitting your form");
+        });
+    });
+}
+
+function handleFormValidation() {
+  const alphabetInputs = document.querySelectorAll(
+    "[data-content='alphabets']"
+  );
+  const numberInputs = document.querySelectorAll("[data-content='numbers']");
+
+  alphabetInputs.forEach((input) => {
+    input.addEventListener("input", function () {
+      var inputValue = input.value;
+
+      var nonAlphabeticRegex = /[^a-zA-Z ]/;
+
+      if (nonAlphabeticRegex.test(inputValue)) {
+        input.value = inputValue.replace(nonAlphabeticRegex, "");
+      }
+    });
+  });
+
+  numberInputs.forEach((input) => {
+    input.addEventListener("input", function () {
+      var inputValue = input.value;
+
+      var nonAlphabeticRegex = /[^0-9]/;
+
+      if (nonAlphabeticRegex.test(inputValue)) {
+        input.value = inputValue.replace(nonAlphabeticRegex, "");
+      }
+    });
+  });
+}
+
 export const TILE_SIZE = 108;
 export const COLS = 15;
 export let ROWS = 12;
@@ -234,10 +321,8 @@ function loadCanvas() {
     ROWS = 12;
   }
 
-  // Define breakpoint for switching to vertical layout
-  const breakpoint = 1280; // Adjust this value as needed
+  const breakpoint = 1280;
 
-  // Get container width
   const containerWidth = container.clientWidth;
 
   // Calculate dimensions and scale
@@ -259,10 +344,8 @@ function loadCanvas() {
   canvas.width = newWidth;
   canvas.height = newHeight;
 
-  // Scale the context
   ctx.scale(scale, scale);
 
-  // Adjust container height to match canvas
   container.style.height = `${newHeight}px`;
 
   class Game {
@@ -316,11 +399,11 @@ function loadCanvas() {
 
     render(ctx, deltaTime) {
       this.hero.update();
-      this.hero1.update();
+      // this.hero1.update();
       this.world.drawBackground(ctx);
       this.world.drawGrid(ctx);
       this.hero.draw(ctx);
-      this.hero1.draw(ctx);
+      // this.hero1.draw(ctx);
       // this.hero.renderLabel(ctx);
       // this.world.drawForeground(ctx);
 
@@ -353,81 +436,14 @@ function loadCanvas() {
   animate();
 }
 
-window.addEventListener("load", () => {
-  // const el = document.querySelector(".scramble-text");
-  // const fx = new TextScramble(el);
-  // fx.setText(el.innerText);
+window.addEventListener("DOMContentLoaded", () => {
   handlePreloader();
   loadCanvas();
   createScrollAnimation();
   handleLenisPrevent();
   updateLabels();
-
-  document
-    .getElementById("contactForm")
-    .addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const formData = new FormData(this);
-
-      fetch("https://formspree.io/f/xeojblel", {
-        method: "POST",
-        body: formData,
-        headers: {
-          Accept: "application/json",
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.ok) {
-            this.reset();
-            window.location.href = "/pages/thanks.html";
-          } else {
-            alert("Oops! There was a problem submitting your form");
-          }
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          alert("Oops! There was a problem submitting your form");
-        });
-    });
-
-  const alphabetInputs = document.querySelectorAll(
-    "[data-content='alphabets']"
-  );
-  const numberInputs = document.querySelectorAll("[data-content='numbers']");
-
-  alphabetInputs.forEach((input) => {
-    input.addEventListener("input", function () {
-      // Get the input value
-      var inputValue = input.value;
-
-      // Create a regular expression to match non-alphabetic characters
-      var nonAlphabeticRegex = /[^a-zA-Z ]/;
-
-      // Test if the input contains non-alphabetic characters
-      if (nonAlphabeticRegex.test(inputValue)) {
-        // If non-alphabetic characters are found, remove them
-        input.value = inputValue.replace(nonAlphabeticRegex, "");
-      }
-    });
-  });
-
-  numberInputs.forEach((input) => {
-    input.addEventListener("input", function () {
-      // Get the input value
-      var inputValue = input.value;
-
-      // Create a regular expression to match non-alphabetic characters
-      var nonAlphabeticRegex = /[^0-9]/;
-
-      // Test if the input contains non-alphabetic characters
-      if (nonAlphabeticRegex.test(inputValue)) {
-        // If non-alphabetic characters are found, remove them
-        input.value = inputValue.replace(nonAlphabeticRegex, "");
-      }
-    });
-  });
+  handleFormSubmit();
+  handleFormValidation();
 });
 
 // ... existing code ...
@@ -467,7 +483,8 @@ const debouncedResize = debounce(() => {
   createScrollAnimation();
   handleLenisPrevent();
   updateLabels();
-}, 250); // Adjust the delay (in milliseconds) as needed
+  window.location.reload();
+}, 250);
 
 window.addEventListener("resize", debouncedResize);
 

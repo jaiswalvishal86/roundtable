@@ -55,9 +55,9 @@ a {
   color: #fff;
   text-decoration: inherit;
 }
-a:hover {
+/* a:hover {
   color: #36488f;
-}
+} */
 
 body {
   width: 100%;
@@ -78,6 +78,11 @@ body {
   align-items: center;
 }
 
+#lottie-container {
+  width: 100%;
+  height: 100%;
+}
+
 #preloader-video {
   width: 100%;
   height: 100%;
@@ -88,6 +93,32 @@ body.loaded #preloader {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+#processingVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 main {
@@ -108,14 +139,13 @@ header {
   justify-content: space-between;
   align-items: center;
   font-size: 1.2rem;
-  padding: 2rem 0rem;
+  padding: 1rem 0rem;
   z-index: 99;
   text-transform: uppercase;
 }
 
 .hamburger {
-  width: 2.5rem;
-  rotate: 90deg;
+  width: 3rem;
 }
 
 .hero {
@@ -153,6 +183,7 @@ header {
   text-align: center;
   line-height: 1.25;
   border-radius: 8rem;
+  text-wrap: balance;
   display: flex;
   align-items: center;
   background-color: rgba(230, 230, 246, 0.4);
@@ -166,8 +197,8 @@ header {
 
 .front h2 {
   font-size: 3rem;
+  font-weight: 400;
   line-height: 1.2;
-  width: 80%;
 }
 
 .hero-content {
@@ -177,6 +208,7 @@ header {
   transition: transform 0.6s;
   transform-style: preserve-3d;
   user-select: none;
+  margin-bottom: 1rem;
 }
 
 .hero-content .front,
@@ -652,7 +684,6 @@ input[type="url"] {
 
   .front h2 {
     font-size: 2.5rem;
-    width: 100%;
   }
 
   .arrow-wrap {
@@ -728,14 +759,16 @@ input[type="url"] {
   }
   .hero-info {
     width: 100%;
-    font-size: 0.85rem;
-    /* padding: 0.5rem 1rem; */
+    font-size: 0.9rem;
     border-radius: 4rem;
   }
 
   .front h2 {
-    font-size: 2rem;
-    width: 100%;
+    font-size: 1.8rem;
+  }
+
+  .hero-content {
+    margin-bottom: 0rem;
   }
 
   .arrow-wrap {
