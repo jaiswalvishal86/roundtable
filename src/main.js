@@ -478,14 +478,24 @@ function updateLabels() {
   }
 }
 
+let previousWidth = window.innerWidth;
+let previousHeight = window.innerHeight;
+
 const debouncedResize = debounce(() => {
+  const currentWidth = window.innerWidth;
+  const currentHeight = window.innerHeight;
+
   loadCanvas();
   createScrollAnimation();
   handleLenisPrevent();
   updateLabels();
-  if (!document.hidden) {
+
+  if (currentWidth !== previousWidth) {
     window.location.reload();
   }
+
+  previousWidth = currentWidth;
+  previousHeight = currentHeight;
 }, 250);
 
 window.addEventListener("resize", debouncedResize);
