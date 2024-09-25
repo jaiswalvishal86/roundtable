@@ -379,7 +379,7 @@ function loadCanvas() {
     heightScaler = 2;
     ROWS = 15;
   } else if (window.innerWidth <= 600) {
-    heightScaler = 2.35;
+    heightScaler = 2.5;
     ROWS = 17;
   } else {
     heightScaler = 1.25;

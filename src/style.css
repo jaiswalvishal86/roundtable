@@ -1065,9 +1065,9 @@ input[type="url"] {
     display: none;
   }
 
-  .hero-spacer {
-    height: 100vh;
-  }
+  /* .hero-spacer {
+    height: 90vh;
+  } */
 
   .submit-btn {
     display: block;
