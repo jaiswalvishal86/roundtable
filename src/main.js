@@ -26,9 +26,58 @@ function raf(time) {
 
 requestAnimationFrame(raf);
 
+let clicked = false;
+
 document.querySelector(".hero-info").addEventListener("click", function () {
+  heroContentTimeline.kill();
+  if (!clicked) {
+    document.querySelector(".hero-content").style.removeProperty("transform");
+    clicked = true;
+  }
   this.classList.toggle("flip");
+
+  if (window.innerWidth <= 600) {
+    if (this.classList.contains("flip")) {
+      this.style.height = "22vh";
+    } else {
+      this.style.height = "17vh";
+    }
+  }
 });
+
+const heroContentTimeline = gsap.timeline({ repeat: -1 });
+
+heroContentTimeline
+  .to(".hero-content", {
+    rotationX: 35,
+    duration: 2,
+    ease: "power2.inOut",
+  })
+  .to(".hero-content", {
+    rotationX: 0,
+    duration: 0.5,
+  });
+
+heroContentTimeline.play();
+
+const openDialogBtn = document.getElementById("openDialogBtn");
+const closeDialogBtn = document.getElementById("closeDialogBtn");
+const dialog = document.getElementById("textListDialog");
+const liDialog = document.querySelectorAll("#textListDialog li");
+
+openDialogBtn.addEventListener("click", () => {
+  dialog.show();
+  if (window.innerWidth > 600) {
+    liDialog.forEach((li) => {
+      const fx = new TextScramble(li);
+      fx.setText(li.innerText);
+    });
+  }
+});
+
+// closeDialogBtn.addEventListener("click", () => {
+//   dialog.close();
+// });
 
 document.getElementById("contactLink").addEventListener("click", function (e) {
   e.preventDefault();
@@ -201,6 +250,17 @@ proceedBtn.addEventListener("click", () => {
 //   preloaderVideo.play();
 // }
 
+const hamburger = document.querySelector(".hamburger");
+
+const animate = lottie.loadAnimation({
+  container: hamburger,
+  renderer: "svg",
+  loop: true,
+  autoplay: true,
+  path: "/r_simple.json",
+});
+animate.setSpeed(0.5);
+
 function handlePreloader() {
   const preloader = document.getElementById("preloader");
   const lottieContainer = document.getElementById("lottie-container");
@@ -219,6 +279,11 @@ function handlePreloader() {
     setTimeout(() => {
       preloader.style.display = "none";
     }, 500);
+    // gsap.to(".hero-content", {
+    //   rotationX: 360,
+    //   duration: 1,
+    //   ease: "circ.out",
+    // });
   });
 }
 
