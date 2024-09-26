@@ -72,13 +72,13 @@ body {
   letter-spacing: -0.15em;
   font-family: Dogicapixel-bold, sans-serif;
   text-transform: uppercase;
-  width: 12vw;
-  height: 7vw;
-  box-shadow: 0 0 20px rgba(255, 255, 255);
-  border: 1px solid #ffffff;
-  filter: drop-shadow(0 0 20px rgba(255, 255, 255))
-    drop-shadow(0 0 20px rgba(255, 255, 255, 0.6))
-    drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+  width: 10vw;
+  height: 5vw;
+  border: 1px solid transparent;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8))
+    drop-shadow(0 0 12px rgba(255, 255, 255, 0.7))
+    drop-shadow(0 0 12px rgba(255, 255, 255, 0.75));
   cursor: pointer;
   position: absolute;
   border-radius: 100%;
@@ -86,19 +86,35 @@ body {
   left: 50%;
   transform: translate(-50%, -50%) rotateX(45deg);
   z-index: 5;
+  transition: box-shadow 0.3s ease, filter 0.3s ease;
   /* transform-style: preserve-3d; */
+  /* animation: pulsateShadow 2s ease-in-out infinite; */
+}
+
+@keyframes pulsateShadow {
+  0%,
+  100% {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.8))
+      drop-shadow(0 0 12px rgba(255, 255, 255, 0.7))
+      drop-shadow(0 0 12px rgba(255, 255, 255, 0.75));
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(255, 255, 255, 0.8);
+    filter: drop-shadow(0 0 24px rgba(255, 255, 255, 0.8))
+      drop-shadow(0 0 24px rgba(255, 255, 255, 0.7))
+      drop-shadow(0 0 24px rgba(255, 255, 255, 0.75));
+  }
 }
 
 #textListDialog {
   position: absolute;
-  top: 38%;
+  top: 40%;
   left: 50%;
   color: #fff;
-  /* display: flex; */
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* gap: 1rem; */
   padding: 2rem;
   font-family: Dogicapixel, sans-serif;
   z-index: 6;
@@ -113,6 +129,14 @@ body {
   transform: translate(-50%, -50%) rotateX(45deg);
 }
 
+.clients-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
 #textListDialog ul {
   list-style: none;
   display: flex;
@@ -121,17 +145,18 @@ body {
   justify-content: center;
   font-size: 1rem;
   cursor: pointer;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
 }
 
 #textListDialog ul li:hover {
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255))
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.5))
     drop-shadow(0 0 6px rgba(255, 255, 255, 0.6))
     drop-shadow(0 0 6px rgba(255, 255, 255, 0.5));
 }
 
-#textListDialog::backdrop {
+/* #textListDialog::backdrop {
   backdrop-filter: blur(12px);
-}
+} */
 
 #closeDialogBtn {
   background-color: #3c3c3c;
@@ -158,6 +183,10 @@ body {
 #lottie-container {
   width: 100%;
   /* height: 100%; */
+}
+
+#lottie-container svg {
+  scale: 1.25;
 }
 
 #preloader-video {
@@ -789,13 +818,31 @@ input[type="url"] {
 }
 
 @media screen and (max-width: 1024px) {
+  #lottie-container svg {
+    scale: 1;
+  }
+
+  #lottie-container svg g:nth-child(11) {
+    transform: matrix(
+      0.7560000419616699,
+      0,
+      0,
+      0.7560000419616699,
+      34.416996002197266,
+      700.260009765625
+    );
+  }
+
   #openDialogBtn {
+    /* background-color: transparent; */
     top: 20%;
     font-size: 1.25rem;
+    transform: translate(-50%, -50%) rotateX(30deg);
   }
 
   #textListDialog {
     top: 27%;
+    transform: translate(-50%, -50%) rotateX(30deg);
   }
 
   #textListDialog ul {
@@ -888,11 +935,27 @@ input[type="url"] {
 }
 
 @media screen and (max-width: 600px) {
+  #lottie-container svg g:nth-child(11) {
+    transform: matrix(
+      0.7560000419616699,
+      0,
+      0,
+      0.7560000419616699,
+      34.416996002197266,
+      812.260009765625
+    );
+  }
+
   #openDialogBtn {
-    top: 17%;
-    width: 5rem;
-    height: 3.5rem;
-    font-size: 0.8rem;
+    top: 17.5%;
+    width: 3.5rem;
+    height: 2rem;
+    font-size: 0.6rem;
+  }
+
+  .clients-wrap {
+    display: flex;
+    flex-direction: row;
   }
 
   #textListDialog {
@@ -900,7 +963,7 @@ input[type="url"] {
   }
 
   #textListDialog ul {
-    gap: 1.5rem;
+    gap: 1.25rem;
     flex-direction: column;
     align-items: center;
     font-size: 0.7rem;
@@ -937,7 +1000,7 @@ input[type="url"] {
   }
 
   .img-label-wrap {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
   }
 
   .canvas-container {

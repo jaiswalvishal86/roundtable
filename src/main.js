@@ -49,13 +49,18 @@ const heroContentTimeline = gsap.timeline({ repeat: -1 });
 
 heroContentTimeline
   .to(".hero-content", {
-    rotationX: 35,
-    duration: 2,
-    ease: "power2.inOut",
+    rotationX: 25,
+    duration: 1,
+    ease: "power2.out",
   })
   .to(".hero-content", {
     rotationX: 0,
     duration: 0.5,
+  })
+  .to(".hero-content", {
+    rotationX: -25,
+    duration: 1,
+    ease: "power2.out",
   });
 
 heroContentTimeline.play();
@@ -66,13 +71,25 @@ const dialog = document.getElementById("textListDialog");
 const liDialog = document.querySelectorAll("#textListDialog li");
 
 openDialogBtn.addEventListener("click", () => {
-  dialog.show();
-  if (window.innerWidth > 600) {
-    liDialog.forEach((li) => {
-      const fx = new TextScramble(li);
-      fx.setText(li.innerText);
-    });
+  if (dialog.open) {
+    openDialogBtn.innerText = "Open";
+    openDialogBtn.style.boxShadow = "0 0 12px rgba(255, 255, 255, 0.8)";
+    openDialogBtn.style.filter =
+      "drop-shadow(0 0 12px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.95))";
+    dialog.close();
+  } else {
+    openDialogBtn.innerText = "Close";
+    openDialogBtn.style.boxShadow = "0 0 24px rgba(255, 255, 255, 0.9)";
+    openDialogBtn.style.filter =
+      "drop-shadow(0 0 24px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 24px rgba(255, 255, 255, 0.9)) drop-shadow(0 0 24px rgba(255, 255, 255, 0.95))";
+    dialog.show();
   }
+  // if (window.innerWidth > 600) {
+  //   liDialog.forEach((li) => {
+  //     const fx = new TextScramble(li);
+  //     fx.setText(li.innerText);
+  //   });
+  // }
 });
 
 // closeDialogBtn.addEventListener("click", () => {
@@ -266,13 +283,18 @@ function handlePreloader() {
   const lottieContainer = document.getElementById("lottie-container");
   const body = document.body;
 
+  const lottieFile =
+    window.innerWidth <= 1024 ? "/loader_mobile.json" : "/loader_desktop.json";
+
   const animation = lottie.loadAnimation({
     container: lottieContainer,
     renderer: "svg",
     loop: false,
     autoplay: true,
-    path: "/loader.json",
+    path: lottieFile,
   });
+
+  animation.setSpeed(0.75);
 
   animation.addEventListener("complete", () => {
     body.classList.add("loaded");
