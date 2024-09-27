@@ -269,11 +269,11 @@ header {
   height: 100%;
 }
 
-.hamburger {
+.brand {
   width: 3rem;
 }
 
-.hamburger svg {
+.brand svg {
   scale: 2.5;
 }
 

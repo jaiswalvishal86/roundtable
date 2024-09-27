@@ -4,7 +4,6 @@ import { World } from "./world.js";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import lottie from "lottie-web";
 import TextScramble from "./scramble.js";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -252,25 +251,10 @@ proceedBtn.addEventListener("click", () => {
     );
 });
 
-// function handlePreloader() {
-//   const preloader = document.getElementById("preloader");
-//   const preloaderVideo = document.getElementById("preloader-video");
-//   const body = document.body;
-
-//   preloaderVideo.addEventListener("ended", () => {
-//     body.classList.add("loaded");
-//     setTimeout(() => {
-//       preloader.style.display = "none";
-//     }, 500);
-//   });
-
-//   preloaderVideo.play();
-// }
-
-const hamburger = document.querySelector(".hamburger");
+const brand = document.querySelector(".brand");
 
 const animate = lottie.loadAnimation({
-  container: hamburger,
+  container: brand,
   renderer: "svg",
   loop: true,
   autoplay: true,
@@ -301,11 +285,6 @@ function handlePreloader() {
     setTimeout(() => {
       preloader.style.display = "none";
     }, 500);
-    // gsap.to(".hero-content", {
-    //   rotationX: 360,
-    //   duration: 1,
-    //   ease: "circ.out",
-    // });
   });
 }
 
@@ -456,23 +435,6 @@ function loadCanvas() {
         label: "Hero",
       });
 
-      this.hero1 = new Hero({
-        game: this,
-        sprite: {
-          image: document.getElementById("hero1"),
-          x: 0,
-          y: 11,
-          width: 64,
-          height: 64,
-        },
-        position: {
-          x: 3 * TILE_SIZE,
-          y: window.innerWidth <= 600 ? 12 * TILE_SIZE : 8 * TILE_SIZE,
-        },
-        walkRange: 1,
-        speed: 2,
-        label: "Hero1",
-      });
       this.input = new Input();
 
       this.eventUpdate = false;
@@ -486,11 +448,9 @@ function loadCanvas() {
 
     render(ctx, deltaTime) {
       this.hero.update();
-      // this.hero1.update();
       this.world.drawBackground(ctx);
       this.world.drawGrid(ctx);
       this.hero.draw(ctx);
-      // this.hero1.draw(ctx);
       // this.hero.renderLabel(ctx);
       // this.world.drawForeground(ctx);
 
@@ -523,7 +483,7 @@ function loadCanvas() {
   animate();
 }
 
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
   handlePreloader();
   loadCanvas();
   createScrollAnimation();
@@ -532,8 +492,6 @@ window.addEventListener("DOMContentLoaded", () => {
   handleFormSubmit();
   handleFormValidation();
 });
-
-// ... existing code ...
 
 function debounce(func, wait) {
   let timeout;

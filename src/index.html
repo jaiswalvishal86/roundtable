@@ -22,10 +22,6 @@
   </head>
   <body>
     <div id="preloader">
-      <!-- <video id="preloader-video" muted playsinline>
-        <source src="/preloader.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video> -->
       <div id="lottie-container"></div>
     </div>
     <div id="processingModal" class="modal">
@@ -33,13 +29,12 @@
         <video id="processingVideo" loop muted>
           <source src="/process.mp4" type="video/mp4" />
         </video>
-        <!-- <p>Processing your submission...</p> -->
       </div>
     </div>
     <main>
       <header>
         <a href="/">
-          <div class="hamburger"></div>
+          <div class="brand"></div>
         </a>
         <a href="#" id="contactLink" class="contact-btn">
           <svg
@@ -422,5 +417,11 @@
     </main>
 
     <script type="module" src="/main.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie_svg.min.js"
+      integrity="sha512-ZfmNTCDjwvHcUB0QrhRYb+K+NO+eXjNQKo7IGd6AAx0dWlG4dEXrk36wAdky7IxM21C+VxjWT8AO0suZKXtfIQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   </body>
 </html>
