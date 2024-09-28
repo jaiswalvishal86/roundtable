@@ -833,6 +833,10 @@ input[type="url"] {
     );
   }
 
+  #lottie-container svg g:nth-child(11) > g:nth-child(3) > g:nth-child(11) {
+    transform: matrix(1, 0, 0, 1, -167.84999084472656, 0);
+  }
+
   #openDialogBtn {
     /* background-color: transparent; */
     top: 20%;
