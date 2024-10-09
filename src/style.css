@@ -340,12 +340,12 @@ header {
   height: 100%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden; /* Safari-specific */
+  -moz-backface-visibility: hidden;
   padding-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(230, 230, 246, 0.4);
-  backdrop-filter: blur(12px);
+  background-color: rgba(230, 230, 246);
   border-radius: 8rem;
   border: 28px solid;
   border-image-source: url("/border_img__blue.svg");
