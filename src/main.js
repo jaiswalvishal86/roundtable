@@ -25,28 +25,24 @@ function raf(time) {
 
 requestAnimationFrame(raf);
 
-document.querySelector(".card").addEventListener("click", function () {
+let clicked = false;
+
+document.querySelector(".hero-info").addEventListener("click", function () {
+  heroContentTimeline.kill();
+  if (!clicked) {
+    document.querySelector(".hero-content").style.removeProperty("transform");
+    clicked = true;
+  }
   this.classList.toggle("flip");
+
+  if (window.innerWidth <= 600) {
+    if (this.classList.contains("flip")) {
+      this.style.height = "22vh";
+    } else {
+      this.style.height = "17vh";
+    }
+  }
 });
-
-// let clicked = false;
-
-// document.querySelector(".hero-info").addEventListener("click", function () {
-//   heroContentTimeline.kill();
-//   if (!clicked) {
-//     document.querySelector(".hero-content").style.removeProperty("transform");
-//     clicked = true;
-//   }
-//   this.classList.toggle("flip");
-
-//   if (window.innerWidth <= 600) {
-//     if (this.classList.contains("flip")) {
-//       this.style.height = "22vh";
-//     } else {
-//       this.style.height = "17vh";
-//     }
-//   }
-// });
 
 const heroContentTimeline = gsap.timeline({ repeat: -1 });
 
